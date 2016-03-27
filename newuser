@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "----------------------------------------------------"
+echo -e "\e[1;33;44m[ Buat User Baru ]\e[0m"
+echo "----------------------------------------------------"
+echo -n "Nama Akun	: "
+read akun
+echo -n "Password	: "
+read pass
+echo -n "Masa Aktif	: "
+read exp
+IP=`ifconfig eth0| awk 'NR==2 {print $2}'| awk -F: '{print $2}'`
+useradd -e `date -d "$exp days" +"%Y-%m-%d"` -s /bin/false -M $akun
+echo -e "$pass\n$pass\n"|passwd $akun &> /dev/null
+echo "-----------------------------------------------------"
+echo -e "\e[1;33;44m[ Akun Baru Sudah Dibuat ]\e[0m"
+echo "-----------------------------------------------------"
+echo -e "Username	: $akun "
+echo -e "Password	: $pass"
+echo -e "Masa Aktif	: $exp hari"
+echo -e "IP			: $IP "
+echo -e "Port		: 80, 143, 443 "
+echo "-----------------------------------------------------"
+echo -e "\e[1;33;44m[ Edited By seven4zero ]\e[0m"
